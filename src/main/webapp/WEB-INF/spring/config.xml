@@ -12,7 +12,7 @@
 
 	<!-- MVC configurations -->
 	<mvc:annotation-driven enable-matrix-variables="true" />
-	<context:component-scan base-package="com.matrixvariable" />
+	<context:component-scan base-package="com.bilgeadam.webexam" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<!-- Properties files -->
 	<context:property-placeholder location="classpath:application.properties"
@@ -39,7 +39,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan">
 			<array>
-				<value>com.yjs3405.hr.model.domain.impl</value>
+				<value>com.bilgeadam.webexam.entity.impl</value>
 			</array>
 		</property>
 		<property name="hibernateProperties">
