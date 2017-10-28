@@ -53,7 +53,7 @@ public class ShoppingCart extends AbstractEntity {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "CARTOWNER")
+	@JoinColumn(name = "CART_OWNER")
 	public Customer getCartOwner() {
 		return cartOwner;
 	}

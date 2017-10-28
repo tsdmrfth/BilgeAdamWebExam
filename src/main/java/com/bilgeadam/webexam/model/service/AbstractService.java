@@ -7,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bilgeadam.webexam.model.entity.GenericEntity;
 import com.bilgeadam.webexam.model.dao.GenericDAO;
 
-
 @Transactional
 public class AbstractService<E extends GenericEntity> implements GenericService<E> {
+	
 	protected final GenericDAO<E> genericDAO;
 
 	public AbstractService(GenericDAO<E> genericDAO) {

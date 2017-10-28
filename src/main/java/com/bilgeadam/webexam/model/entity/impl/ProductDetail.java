@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.bilgeadam.webexam.model.entity.AbstractEntity;
+
 /**
  * @author fatih taşdemir Oct 12, 2017
  */
@@ -50,7 +51,7 @@ public class ProductDetail extends AbstractEntity {
 		this.weight = weight;
 	}
 
-	@Column(name = "COLOR")
+	@Column(name = "COLOR", length = 50)
 	public String getColor() {
 		return color;
 	}

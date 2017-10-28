@@ -1,14 +1,15 @@
 package com.bilgeadam.webexam.model.entity.impl;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.bilgeadam.webexam.model.entity.AbstractEntity;
 
-/***
+/**
  * @author Fatih Taşdemir Oct 28, 2017
  */
 
@@ -20,7 +21,8 @@ public class ShoppingCartItem extends AbstractEntity {
 	private Product addedProduct;
 	private ShoppingCart belongedShoppingCart;
 
-	@Column(name = "ADDED_PRODUCT", nullable = false)
+	@OneToOne
+	@MapsId
 	public Product getAddedProduct() {
 		return addedProduct;
 	}

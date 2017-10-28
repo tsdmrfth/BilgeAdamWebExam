@@ -71,7 +71,7 @@ public class Customer extends AbstractEntity {
 		this.address = address;
 	}
 
-	@OneToMany(mappedBy="cartOwner")
+	@OneToMany(mappedBy = "cartOwner")
 	public List<ShoppingCart> getCustomerShoppingCart() {
 		return customerShoppingCart;
 	}
@@ -79,8 +79,8 @@ public class Customer extends AbstractEntity {
 	public void setCustomerShoppingCart(List<ShoppingCart> customerShoppingCart) {
 		this.customerShoppingCart = customerShoppingCart;
 	}
-	
-	@OneToMany(mappedBy="orderOwner")
+
+	@OneToMany(mappedBy = "orderOwner")
 	public List<Order> getOwnedOrder() {
 		return ownedOrder;
 	}

@@ -4,4 +4,5 @@ import com.bilgeadam.webexam.model.entity.impl.User;
 
 public interface UserDAO extends GenericDAO<User> {
 
+	boolean checkUser(User user);
 }

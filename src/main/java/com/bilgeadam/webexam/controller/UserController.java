@@ -8,29 +8,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bilgeadam.webexam.model.DatabaseService;
 import com.bilgeadam.webexam.model.entity.impl.User;
-import com.bilgeadam.webexam.model.service.UserService;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping({ "/", "/login" })
 public class UserController {
 
 	@Autowired
-	private UserService userService;
-	
+	DatabaseService databaseService;
+
 	@GetMapping
-	public String root(Model model) {
-		model.addAttribute("users", userService.findAll());
-		return "users";
+	public String root() {
+		return "login";
 	}
-	
+
 	@PostMapping("/signup")
-	public String signup(@RequestParam String pwd,@RequestParam String email) {
+	public String signup(@RequestParam String pwd, @RequestParam String email, Model model) {
 		User user = new User();
 		user.setEmail(email);
 		user.setPassword(pwd);
-        userService.save(user);
+		boolean result = databaseService.getUserService().checkUser(user);
+		if (!result) {
+			model.addAttribute("error", "error");
+			return "redirect/login";
+		}
 		return "redirect:/users";
 	}
-	
+
 }
