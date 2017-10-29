@@ -3,6 +3,7 @@ package com.bilgeadam.webexam.model.entity.impl;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,7 +23,7 @@ public class Customer extends AbstractEntity {
 	private String lastName;
 	private String email;
 	private String password;
-	private Address address;
+	private List<Address> address;
 	private List<ShoppingCart> customerShoppingCart;
 	private List<Order> ownedOrder;
 
@@ -62,12 +63,12 @@ public class Customer extends AbstractEntity {
 		this.password = password;
 	}
 
-	@Column(name = "ADDRESS", nullable = false)
-	public Address getAddress() {
+	@ElementCollection
+	public List<Address> getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
 

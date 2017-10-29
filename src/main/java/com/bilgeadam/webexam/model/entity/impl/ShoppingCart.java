@@ -43,7 +43,7 @@ public class ShoppingCart extends AbstractEntity {
 		this.isActive = isActive;
 	}
 
-	@Column(name = "IS_SOLD", nullable = false)
+	@Column(name = "IS_SOLD")
 	public boolean isSold() {
 		return isSold;
 	}

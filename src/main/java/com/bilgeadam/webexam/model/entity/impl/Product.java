@@ -11,8 +11,7 @@ import javax.persistence.Table;
 import com.bilgeadam.webexam.model.entity.AbstractEntity;
 
 /**
- * @author Fatih Taşdemir 
- * Oct 28, 2017
+ * @author Fatih Taşdemir Oct 28, 2017
  */
 
 @Entity
@@ -103,7 +102,7 @@ public class Product extends AbstractEntity {
 		this.availableStock = availableStock;
 	}
 
-	@OneToOne()
+	@OneToOne(targetEntity = ProductDetail.class)
 	@MapsId
 	public ProductDetail getProductDetail() {
 		return productDetail;
