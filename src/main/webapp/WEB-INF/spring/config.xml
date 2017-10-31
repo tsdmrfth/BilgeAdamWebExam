@@ -3,20 +3,39 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<!-- MVC configurations -->
 	<mvc:annotation-driven enable-matrix-variables="true" />
-	<context:component-scan base-package="com.matrixvariable" />
+	<context:component-scan base-package="com.bilgeadam.webexam" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<!-- Properties files -->
 	<context:property-placeholder location="classpath:application.properties"
 		ignore-unresolvable="true" />
+
+	<!-- Spring MVC Interceptor Beans -->
+	<mvc:interceptors>
+		<bean
+			class="com.bilgeadam.webexam.interceptor.PerformanceMonitorInterceptor" />
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="language" />
+		</bean>
+		<bean class="com.bilgeadam.webexam.interceptor.AuditingInterceptor" />
+	</mvc:interceptors>
+
+	<!-- Spring Mvc Internationalization -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
 
 	<!-- Tiles configurations -->
 	<bean
@@ -39,7 +58,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan">
 			<array>
-				<value>com.yjs3405.hr.model.domain.impl</value>
+				<value>com.bilgeadam.webexam.model.entity.impl</value>
 			</array>
 		</property>
 		<property name="hibernateProperties">
@@ -64,7 +83,7 @@
 
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-		
+
 	<!-- Spring MessageSource -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
