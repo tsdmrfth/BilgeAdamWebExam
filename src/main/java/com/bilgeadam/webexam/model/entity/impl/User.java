@@ -11,16 +11,16 @@ import com.bilgeadam.webexam.model.entity.AbstractEntity;
 public class User extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
-	private String email;
+	private String username;
 	private String password;
 
-	@Column(name = "email", length = 255, nullable = false)
-	public String getEmail() {
-		return email;
+	@Column(name = "USERNAME", length = 255, nullable = false)
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Column(name = "password", length = 255, nullable = false)

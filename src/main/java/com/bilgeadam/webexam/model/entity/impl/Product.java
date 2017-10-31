@@ -2,8 +2,6 @@ package com.bilgeadam.webexam.model.entity.impl;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,7 +22,7 @@ public class Product extends AbstractEntity {
 	private String model;
 	private String barcode;
 	private double price;
-	private ProductCategory productCategory;
+	private String productCategory;
 	private Integer producedYear;
 	private Integer availableStock;
 	private ProductDetail productDetail;
@@ -74,13 +72,12 @@ public class Product extends AbstractEntity {
 		this.price = price;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "PRODUCT_CATEGORY", referencedColumnName = "NAME")
-	public ProductCategory getProductCategory() {
+	@Column(name = "PRODUCT_CATEGORY", nullable = false)
+	public String getProductCategory() {
 		return productCategory;
 	}
 
-	public void setProductCategory(ProductCategory productCategory) {
+	public void setProductCategory(String productCategory) {
 		this.productCategory = productCategory;
 	}
 
@@ -102,7 +99,7 @@ public class Product extends AbstractEntity {
 		this.availableStock = availableStock;
 	}
 
-	@OneToOne(targetEntity = ProductDetail.class)
+	@OneToOne
 	@MapsId
 	public ProductDetail getProductDetail() {
 		return productDetail;

@@ -21,7 +21,7 @@ public class UserDAOImpl extends HibernateDAO<User> implements UserDAO {
 	public boolean checkUser(User user) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(User.class);
-		criteria.add(Restrictions.eq("email", user.getEmail()));
+		criteria.add(Restrictions.eq("username", user.getUsername()));
 		criteria.add(Restrictions.eq("password", user.getPassword()));
 		if (criteria.uniqueResult() == null) {
 			return false;

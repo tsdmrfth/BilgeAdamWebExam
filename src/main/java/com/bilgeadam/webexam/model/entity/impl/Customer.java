@@ -3,9 +3,10 @@ package com.bilgeadam.webexam.model.entity.impl;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.bilgeadam.webexam.model.entity.AbstractEntity;
@@ -23,7 +24,7 @@ public class Customer extends AbstractEntity {
 	private String lastName;
 	private String email;
 	private String password;
-	private List<Address> address;
+	private Address address;
 	private List<ShoppingCart> customerShoppingCart;
 	private List<Order> ownedOrder;
 
@@ -63,12 +64,13 @@ public class Customer extends AbstractEntity {
 		this.password = password;
 	}
 
-	@ElementCollection
-	public List<Address> getAddress() {
+	@OneToOne
+	@MapsId
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(List<Address> address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 

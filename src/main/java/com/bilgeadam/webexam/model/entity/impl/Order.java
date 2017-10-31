@@ -1,7 +1,6 @@
 package com.bilgeadam.webexam.model.entity.impl;
 
-import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,18 +20,18 @@ import com.bilgeadam.webexam.model.entity.AbstractEntity;
 public class Order extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
-	private List<ShoppingCart> ownedProducts;
+	private ShoppingCart ownedProducts;
 	private double totalCost;
 	private PaymentType paymentType;
 	private Customer orderOwner;
 
 	@OneToOne
 	@MapsId
-	public List<ShoppingCart> getOwnedProducts() {
+	public ShoppingCart getOwnedProducts() {
 		return ownedProducts;
 	}
 
-	public void setOwnedProducts(List<ShoppingCart> ownedProducts) {
+	public void setOwnedProducts(ShoppingCart ownedProducts) {
 		this.ownedProducts = ownedProducts;
 	}
 
@@ -53,9 +52,9 @@ public class Order extends AbstractEntity {
 	public void setPaymentType(PaymentType paymentType) {
 		this.paymentType = paymentType;
 	}
-	
-	@ManyToOne
-	@JoinColumn(name="ORDER_OWNER")
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "ORDER_OWNER")
 	public Customer getOrderOwner() {
 		return orderOwner;
 	}

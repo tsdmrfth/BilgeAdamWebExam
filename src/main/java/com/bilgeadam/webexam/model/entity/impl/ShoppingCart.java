@@ -2,6 +2,7 @@ package com.bilgeadam.webexam.model.entity.impl;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -20,19 +21,10 @@ import com.bilgeadam.webexam.model.entity.AbstractEntity;
 public class ShoppingCart extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
-	private List<ShoppingCartItem> shoppingCartItems;
 	private boolean isActive;
 	private boolean isSold;
 	private Customer cartOwner;
-
-	@OneToMany(mappedBy = "belongedShoppingCart")
-	public List<ShoppingCartItem> getShoppingCartItems() {
-		return shoppingCartItems;
-	}
-
-	public void setShoppingCartItems(List<ShoppingCartItem> shoppingCartItems) {
-		this.shoppingCartItems = shoppingCartItems;
-	}
+	private List<Product> shoppingCartItems;
 
 	@Column(name = "IS_ACTIVE")
 	public boolean isActive() {
@@ -52,7 +44,7 @@ public class ShoppingCart extends AbstractEntity {
 		this.isSold = isSold;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "CART_OWNER")
 	public Customer getCartOwner() {
 		return cartOwner;
@@ -60,5 +52,15 @@ public class ShoppingCart extends AbstractEntity {
 
 	public void setCartOwner(Customer cartOwner) {
 		this.cartOwner = cartOwner;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="ID")
+	public List<Product> getShoppingCartItems() {
+		return shoppingCartItems;
+	}
+
+	public void setShoppingCartItems(List<Product> shoppingCartItems) {
+		this.shoppingCartItems = shoppingCartItems;
 	}
 }
