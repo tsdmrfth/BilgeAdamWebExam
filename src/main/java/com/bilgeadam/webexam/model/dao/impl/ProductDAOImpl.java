@@ -22,13 +22,15 @@ public class ProductDAOImpl extends HibernateDAO<Product> implements ProductDAO 
 		String shortedModel = null;
 		if (product.getBrand().length() < 5) {
 			shortedBrand = shortedBrand + "";
-		} else
+		} else {
 			shortedBrand = product.getBrand().substring(0, 3);
+		}
 
-		if (product.getModel().length() < 6) {
+		if (product.getModel().length() < 5) {
 			shortedModel = shortedModel + "";
-		} else
-			shortedModel = product.getModel().substring(2, 5);
+		} else {
+			shortedModel = product.getModel().substring(0, 3);
+		}
 
 		String shortedYear = String.valueOf(product.getProducedYear()).substring(1, 3);
 		String ram = String.valueOf(product.getProductDetail().getRam());

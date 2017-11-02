@@ -30,6 +30,9 @@ css/bootstrap.min.css">
 			<c:forEach items="${products}" var="product">
 				<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
 					<div class="thumbnail" style="border-radius: 15px; padding: 10px;">
+						<img
+							src='<c:url value="/resources/assets/${product.id}.png"></c:url>'
+							alt="image" style="width: 100%" />
 						<div class="caption">
 							<p style="color: #A9A9A9"><strong>${product.brand}</strong></p>
 							<p style="color: #A9A9A9">$${product.price}</p>

@@ -14,7 +14,8 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<!-- MVC configurations -->
-	<mvc:annotation-driven enable-matrix-variables="true" />
+	<mvc:annotation-driven enable-matrix-variables="true"
+		validator="validator" />
 	<context:component-scan base-package="com.bilgeadam.webexam" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<!-- Properties files -->
@@ -31,7 +32,7 @@
 		<bean class="com.bilgeadam.webexam.interceptor.AuditingInterceptor" />
 	</mvc:interceptors>
 
-	<!-- Spring Mvc Internationalization -->
+	<!-- Spring MVC Internationalization -->
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
 		<property name="defaultLocale" value="en" />
@@ -44,9 +45,23 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<!-- Spring MVC LocalValidatorFactoryBean -->
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource" />
+	</bean>
+
 	<!-- Transaction definition -->
 	<tx:annotation-driven transaction-manager="transactionManager"
 		proxy-target-class="true" />
+
+	<!-- Spring MVC CommonMultiPartResolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10240000" />
+	</bean>
+
+
 
 	<!-- Datasource Bean definition -->
 	<jee:jndi-lookup id="dataSource" jndi-name="${jndi.datasource}"

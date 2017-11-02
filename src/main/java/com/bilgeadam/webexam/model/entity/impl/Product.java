@@ -1,10 +1,17 @@
 package com.bilgeadam.webexam.model.entity.impl;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bilgeadam.webexam.model.entity.AbstractEntity;
 
@@ -26,7 +33,12 @@ public class Product extends AbstractEntity {
 	private Integer producedYear;
 	private Integer availableStock;
 	private ProductDetail productDetail;
+	private MultipartFile productImage;
+	private String productImageUrl;
+	private Integer unitsInOrder;
 
+	@NotNull(message = "{product.name.notNull}")
+	@Size(min = 2, max = 50, message = "{product.name.size.error}")
 	@Column(name = "NAME", length = 100, nullable = false)
 	public String getName() {
 		return name;
@@ -36,6 +48,8 @@ public class Product extends AbstractEntity {
 		this.name = name;
 	}
 
+	@NotNull(message = "{product.brand.notNull}")
+	@Size(min = 2, max = 50, message = "{product.brand.size.error}")
 	@Column(name = "BRAND", length = 100, nullable = false)
 	public String getBrand() {
 		return brand;
@@ -45,6 +59,8 @@ public class Product extends AbstractEntity {
 		this.brand = brand;
 	}
 
+	@NotNull(message = "{product.model.notNull}")
+	@Size(min = 2, max = 50, message = "{product.model.size.error}")
 	@Column(name = "MODEL", length = 100, nullable = false)
 	public String getModel() {
 		return model;
@@ -63,6 +79,7 @@ public class Product extends AbstractEntity {
 		this.barcode = barcode;
 	}
 
+	@NotNull(message = "{product.price.notNull}")
 	@Column(name = "PRICE", nullable = false)
 	public double getPrice() {
 		return price;
@@ -72,6 +89,7 @@ public class Product extends AbstractEntity {
 		this.price = price;
 	}
 
+	@NotNull(message = "{product.category.notNull}")
 	@Column(name = "PRODUCT_CATEGORY", nullable = false)
 	public String getProductCategory() {
 		return productCategory;
@@ -81,6 +99,7 @@ public class Product extends AbstractEntity {
 		this.productCategory = productCategory;
 	}
 
+	@Past(message = "{product.producedYear.error}")
 	@Column(name = "PRODUCED_YEAR", nullable = false)
 	public Integer getProducedYear() {
 		return producedYear;
@@ -90,6 +109,8 @@ public class Product extends AbstractEntity {
 		this.producedYear = producedYear;
 	}
 
+	@Min(value = 0, message = "{product.availableStock.error}")
+	@NotNull(message = "{product.availableStock.notNull}")
 	@Column(name = "AVAILABLE_STOCK")
 	public Integer getAvailableStock() {
 		return availableStock;
@@ -99,7 +120,7 @@ public class Product extends AbstractEntity {
 		this.availableStock = availableStock;
 	}
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@MapsId
 	public ProductDetail getProductDetail() {
 		return productDetail;
@@ -108,5 +129,29 @@ public class Product extends AbstractEntity {
 	public void setProductDetail(ProductDetail productDetail) {
 		this.productDetail = productDetail;
 	}
+	
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+	
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
+	}
 
+	@Column(name = "IMAGE_URL", length = 255, nullable = false)
+	public String getProductImageUrl() {
+		return productImageUrl;
+	}
+
+	public void setProductImageUrl(String productImageUrl) {
+		this.productImageUrl = productImageUrl;
+	}
+	
+	public Integer getUnitsInOrder() {
+		return unitsInOrder;
+	}
+	
+	public void setUnitsInOrder(Integer unitsInOrder) {
+		this.unitsInOrder = unitsInOrder;
+	}
 }
