@@ -29,6 +29,13 @@
 						style="float: right; font-size: 80%; position: relative; top: -10px">
 						<a href="#">Forgot password?</a>
 					</div>
+					<c:if test="${not empty error}">
+						<div class="alert alert-danger">
+							<spring:message
+								code="login.failed" />
+							<br />
+						</div>
+					</c:if>
 				</div>
 
 				<div style="padding-top: 30px" class="panel-body">
@@ -37,7 +44,8 @@
 						class="alert alert-danger col-sm-12"></div>
 
 					<form id="loginform" class="form-horizontal" role="form"
-						action='<spring:url value="/adminpanel/login"></spring:url>' method="post">
+						action='<spring:url value="/adminpanel/login"></spring:url>'
+						method="post">
 
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
@@ -55,7 +63,7 @@
 						<div style="margin-top: 10px" class="form-group">
 							<!-- Button -->
 							<div class="col-sm-2 col-sm-offset-5 controls">
-								<button id="btn-login" class="btn btn-success">Login </button>
+								<button id="btn-login" class="btn btn-success">Login</button>
 							</div>
 						</div>
 					</form>
