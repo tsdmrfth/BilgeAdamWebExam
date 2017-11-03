@@ -3,6 +3,8 @@ package com.bilgeadam.webexam.model.entity.impl;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -44,6 +46,7 @@ public class Order extends AbstractEntity {
 		this.totalCost = totalCost;
 	}
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "PAYMENT_TYPE", nullable = false)
 	public PaymentType getPaymentType() {
 		return paymentType;
@@ -53,7 +56,7 @@ public class Order extends AbstractEntity {
 		this.paymentType = paymentType;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ORDER_OWNER")
 	public Customer getOrderOwner() {
 		return orderOwner;
@@ -61,6 +64,10 @@ public class Order extends AbstractEntity {
 
 	public void setOrderOwner(Customer orderOwner) {
 		this.orderOwner = orderOwner;
+	}
+
+	private enum PaymentType {
+		CASH, CREDIT_CARD;
 	}
 
 }

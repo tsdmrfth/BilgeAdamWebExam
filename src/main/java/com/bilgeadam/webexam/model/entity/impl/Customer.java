@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -24,6 +26,7 @@ public class Customer extends AbstractEntity {
 	private String lastName;
 	private String email;
 	private String password;
+	private Gender gender;
 	private Address address;
 	private List<ShoppingCart> customerShoppingCart;
 	private List<Order> ownedOrder;
@@ -64,6 +67,16 @@ public class Customer extends AbstractEntity {
 		this.password = password;
 	}
 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "GENDER", nullable = false)
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
 	@OneToOne
 	@MapsId
 	public Address getAddress() {
@@ -90,6 +103,10 @@ public class Customer extends AbstractEntity {
 
 	public void setOwnedOrder(List<Order> ownedOrder) {
 		this.ownedOrder = ownedOrder;
+	}
+
+	private enum Gender {
+		MALE, FEMALE, UNSPECIFIED;
 	}
 
 }

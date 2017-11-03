@@ -59,7 +59,7 @@ public class Address extends AbstractEntity {
 	public void setNeighborhood(String neighborhood) {
 		this.neighborhood = neighborhood;
 	}
-	
+
 	@Column(name = "STREET", length = 124, nullable = false)
 	public String getStreet() {
 		return street;

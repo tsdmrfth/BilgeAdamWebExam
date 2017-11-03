@@ -2,10 +2,11 @@ package com.bilgeadam.webexam.model.entity.impl;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bilgeadam.webexam.model.entity.AbstractEntity;
 
@@ -26,9 +27,9 @@ public class ProductDetail extends AbstractEntity {
 	private String resolution;
 	private Integer display;
 	private Integer ram;
-	private Product product;
-	
-	@NotNull(message="{productDetail.batteryPower.notNull}")
+	private MultipartFile productImage;
+
+	@NotNull(message = "{productDetail.batteryPower.notNull}")
 	@Column(name = "BATTERY_POWER")
 	public Integer getBatteryPower() {
 		return batteryPower;
@@ -37,8 +38,8 @@ public class ProductDetail extends AbstractEntity {
 	public void setBatteryPower(Integer batteryPower) {
 		this.batteryPower = batteryPower;
 	}
-	
-	@NotNull(message="{productDetail.processor.notNull}")
+
+	@NotNull(message = "{productDetail.processor.notNull}")
 	@Column(name = "PROCESSOR")
 	public double getProcessor() {
 		return processor;
@@ -56,8 +57,8 @@ public class ProductDetail extends AbstractEntity {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	
-	@NotNull(message="{productDetail.color.notNull}")
+
+	@NotNull(message = "{productDetail.color.notNull}")
 	@Column(name = "COLOR", length = 50)
 	public String getColor() {
 		return color;
@@ -66,7 +67,7 @@ public class ProductDetail extends AbstractEntity {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
+
 	@NotNull(message = "{productDetail.storage.notNull}")
 	@Column(name = "STORAGE")
 	public Integer getStorage() {
@@ -104,14 +105,13 @@ public class ProductDetail extends AbstractEntity {
 	public void setRam(Integer ram) {
 		this.ram = ram;
 	}
-
-	@OneToOne
-	@MapsId
-	public Product getProduct() {
-		return product;
+	
+	@Transient
+	public MultipartFile getProductImage() {
+		return productImage;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
 	}
 }

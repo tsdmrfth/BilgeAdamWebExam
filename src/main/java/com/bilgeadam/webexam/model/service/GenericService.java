@@ -14,9 +14,9 @@ public interface GenericService<E extends GenericEntity> {
 
 	public abstract void update(E entity);
 
-	public abstract void delete(E entity);
+	public abstract void delete(E entity) throws Exception;
 
-	public abstract E findById(Integer id);
+	public abstract E findById(Integer id) throws Exception;
 
 	public abstract List<E> findAll();
 

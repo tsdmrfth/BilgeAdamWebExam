@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bilgeadam.webexam.exception.ProductNotFoundException;
 import com.bilgeadam.webexam.model.DatabaseService;
 import com.bilgeadam.webexam.model.entity.impl.Address;
 import com.bilgeadam.webexam.model.entity.impl.Customer;
@@ -34,10 +35,18 @@ public class CustomerPanelController {
 	}
 
 	@RequestMapping("/addtocart/{id}")
-	public String addToCart(@PathVariable Integer id) {
+	public String addToCart(@PathVariable Integer id) throws ProductNotFoundException {
 		Address address = new Address();
 		Customer cartOwner = new Customer();
-		Product productToCart = databaseService.getProductService().findById(id);
+		Product productToCart = null;
+		try {
+			productToCart = databaseService.getProductService().findById(id);
+		} catch (Exception e) {
+			if (e instanceof ProductNotFoundException) {
+				throw new ProductNotFoundException("No Product found by this id!");
+			}
+			e.printStackTrace();
+		}
 		ShoppingCart shoppingCart = new ShoppingCart();
 
 		address.setCountry("Turkey");

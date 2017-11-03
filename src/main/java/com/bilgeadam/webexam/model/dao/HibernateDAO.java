@@ -44,7 +44,7 @@ public abstract class HibernateDAO<E extends GenericEntity> implements GenericDA
 	}
 
 	@Override
-	public void delete(E entity) {
+	public void delete(E entity) throws Exception {
 		E e = findById(entity.getId());
 		e.setDeleted(true);
 		update(e);
@@ -52,7 +52,7 @@ public abstract class HibernateDAO<E extends GenericEntity> implements GenericDA
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public E findById(Integer id) {
+	public E findById(Integer id) throws Exception {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(entityClass);
 		criteria.add(Restrictions.eq("id", id));
 		criteria.add(Restrictions.eq("deleted", false));

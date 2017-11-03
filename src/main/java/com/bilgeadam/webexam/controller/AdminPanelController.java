@@ -80,16 +80,16 @@ public class AdminPanelController {
 		return "addproduct";
 	}
 
-	@PostMapping("/addproduct")
-	public String processAddProduct(@ModelAttribute @Valid Product productToAdd,
+	@RequestMapping(value = "/addproduct", method = RequestMethod.POST)
+	public String processAddProduct(@Valid @ModelAttribute("productToAdd") Product productToAdd,
 			@ModelAttribute ProductDetail productDetail, BindingResult bindingResult, HttpServletRequest request,
 			Model model, SaveProductImageFailedException exception) throws SaveProductImageFailedException {
 		if (bindingResult.hasErrors()) {
 			return "addproduct";
 		}
-		MultipartFile productImage = productToAdd.getProductImage();
+		MultipartFile productImage = productDetail.getProductImage();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		String productImageUrl = rootDirectory + "/resorces/assets/images/" + productToAdd.getBarcode() + ".png";
+		String productImageUrl = rootDirectory + "/resorces/assets/images/" + productToAdd.getId() + ".png";
 		if (productImage != null && !productImage.isEmpty()) {
 			try {
 				productImage.transferTo(new File(productImageUrl));
@@ -110,7 +110,7 @@ public class AdminPanelController {
 	}
 
 	@ExceptionHandler(SaveProductImageFailedException.class)
-	public ModelAndView handleError(SaveProductImageFailedException exception) {
+	public ModelAndView handleSaveProductImageFailedException(SaveProductImageFailedException exception) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("error", exception.getException());
 		modelAndView.setViewName("addproduct");

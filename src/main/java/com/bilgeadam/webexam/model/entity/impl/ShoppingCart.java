@@ -22,7 +22,7 @@ public class ShoppingCart extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
 	private boolean isActive;
-	private boolean isSold;
+	private boolean isSold = false;
 	private Customer cartOwner;
 	private List<Product> shoppingCartItems;
 
@@ -44,7 +44,7 @@ public class ShoppingCart extends AbstractEntity {
 		this.isSold = isSold;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "CART_OWNER")
 	public Customer getCartOwner() {
 		return cartOwner;
@@ -55,7 +55,6 @@ public class ShoppingCart extends AbstractEntity {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name="ID")
 	public List<Product> getShoppingCartItems() {
 		return shoppingCartItems;
 	}

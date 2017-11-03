@@ -1,5 +1,6 @@
 package com.bilgeadam.webexam.model.entity.impl;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.MapsId;
@@ -7,10 +8,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import com.bilgeadam.webexam.model.entity.AbstractEntity;
 
@@ -32,7 +30,6 @@ public class Product extends AbstractEntity {
 	private Integer producedYear;
 	private Integer availableStock;
 	private ProductDetail productDetail;
-	private MultipartFile productImage;
 	private String productImageUrl;
 	private Integer unitsInOrder;
 
@@ -98,7 +95,6 @@ public class Product extends AbstractEntity {
 		this.productCategory = productCategory;
 	}
 
-	@Past(message = "{product.producedYear.error}")
 	@Column(name = "PRODUCED_YEAR", nullable = false)
 	public Integer getProducedYear() {
 		return producedYear;
@@ -119,7 +115,7 @@ public class Product extends AbstractEntity {
 		this.availableStock = availableStock;
 	}
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@MapsId
 	public ProductDetail getProductDetail() {
 		return productDetail;
@@ -127,14 +123,6 @@ public class Product extends AbstractEntity {
 
 	public void setProductDetail(ProductDetail productDetail) {
 		this.productDetail = productDetail;
-	}
-
-	public MultipartFile getProductImage() {
-		return productImage;
-	}
-
-	public void setProductImage(MultipartFile productImage) {
-		this.productImage = productImage;
 	}
 
 	@Column(name = "IMAGE_URL", length = 255, nullable = false)
@@ -153,4 +141,5 @@ public class Product extends AbstractEntity {
 	public void setUnitsInOrder(Integer unitsInOrder) {
 		this.unitsInOrder = unitsInOrder;
 	}
+
 }
