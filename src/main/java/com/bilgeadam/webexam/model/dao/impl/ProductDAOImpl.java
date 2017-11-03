@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.bilgeadam.webexam.model.dao.impl;
 
 import org.springframework.stereotype.Repository;

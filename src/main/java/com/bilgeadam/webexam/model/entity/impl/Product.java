@@ -1,6 +1,5 @@
 package com.bilgeadam.webexam.model.entity.impl;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.MapsId;
@@ -120,7 +119,7 @@ public class Product extends AbstractEntity {
 		this.availableStock = availableStock;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@MapsId
 	public ProductDetail getProductDetail() {
 		return productDetail;
@@ -129,11 +128,11 @@ public class Product extends AbstractEntity {
 	public void setProductDetail(ProductDetail productDetail) {
 		this.productDetail = productDetail;
 	}
-	
+
 	public MultipartFile getProductImage() {
 		return productImage;
 	}
-	
+
 	public void setProductImage(MultipartFile productImage) {
 		this.productImage = productImage;
 	}
@@ -146,11 +145,11 @@ public class Product extends AbstractEntity {
 	public void setProductImageUrl(String productImageUrl) {
 		this.productImageUrl = productImageUrl;
 	}
-	
+
 	public Integer getUnitsInOrder() {
 		return unitsInOrder;
 	}
-	
+
 	public void setUnitsInOrder(Integer unitsInOrder) {
 		this.unitsInOrder = unitsInOrder;
 	}

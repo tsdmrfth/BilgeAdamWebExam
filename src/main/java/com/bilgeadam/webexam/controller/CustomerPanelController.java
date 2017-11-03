@@ -39,7 +39,7 @@ public class CustomerPanelController {
 		Customer cartOwner = new Customer();
 		Product productToCart = databaseService.getProductService().findById(id);
 		ShoppingCart shoppingCart = new ShoppingCart();
-		
+
 		address.setCountry("Turkey");
 		address.setCity("");
 		address.setDistrict("Kadıköy");
@@ -47,22 +47,23 @@ public class CustomerPanelController {
 		address.setBuildingNumber("11");
 		address.setNeighborhood("Ziverbey Mahallesi");
 		address.setStreet("Recai Bey Sokak");
-		
+
 		cartOwner.setEmail("tsdmrfth@gmail.com");
 		cartOwner.setFirstName("Fatih");
 		cartOwner.setLastName("Tasdemir");
 		cartOwner.setPassword("asdf");
 		cartOwner.setAddress(address);
 		List<ShoppingCart> shoppingCarts = new ArrayList<>();
-		cartOwner.setCustomerShoppingCart(shoppingCarts);;
-		
+		cartOwner.setCustomerShoppingCart(shoppingCarts);
+		;
+
 		List<Product> shoppingCartItem = new ArrayList<>();
 		shoppingCartItem.add(productToCart);
 		shoppingCart.setShoppingCartItems(shoppingCartItem);
-		
+
 		shoppingCart.setActive(true);
 		shoppingCart.setCartOwner(cartOwner);
-			
+
 		databaseService.getAddressService().save(address);
 		databaseService.getCustomerService().save(cartOwner);
 		databaseService.getShoppingCartService().save(shoppingCart);

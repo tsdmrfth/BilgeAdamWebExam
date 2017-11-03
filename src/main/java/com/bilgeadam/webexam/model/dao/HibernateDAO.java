@@ -1,6 +1,7 @@
 package com.bilgeadam.webexam.model.dao;
 
 import java.lang.reflect.ParameterizedType;
+
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bilgeadam.webexam.model.entity.GenericEntity;
 
-public abstract class HibernateDAO<E extends GenericEntity> implements GenericDAO<E>{
+/**
+ * @author Fatih Taşdemir Oct 29, 2017
+ */
+
+public abstract class HibernateDAO<E extends GenericEntity> implements GenericDAO<E> {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -20,7 +25,8 @@ public abstract class HibernateDAO<E extends GenericEntity> implements GenericDA
 
 	@SuppressWarnings("unchecked")
 	public HibernateDAO() {
-		this.entityClass = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		this.entityClass = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass())
+				.getActualTypeArguments()[0];
 	}
 
 	@Override
@@ -60,5 +66,5 @@ public abstract class HibernateDAO<E extends GenericEntity> implements GenericDA
 		criteria.add(Restrictions.eq("deleted", false));
 		return criteria.list();
 	}
-	
+
 }

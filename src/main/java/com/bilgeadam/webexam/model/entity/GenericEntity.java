@@ -3,6 +3,10 @@ package com.bilgeadam.webexam.model.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author Fatih Taşdemir Oct 29, 2017
+ */
+
 public interface GenericEntity extends Serializable {
 
 	public abstract Integer getId();
