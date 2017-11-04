@@ -1,3 +1,5 @@
 .classpath
 .project
 .settings/*
+WebExam-Audit.log
+WebExam-Logger.log
