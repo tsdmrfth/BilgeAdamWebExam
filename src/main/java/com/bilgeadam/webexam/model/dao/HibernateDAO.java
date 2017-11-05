@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.bilgeadam.webexam.exception.AbstractEntityNotFoundException;
 import com.bilgeadam.webexam.model.entity.GenericEntity;
 
 /**
@@ -44,7 +45,7 @@ public abstract class HibernateDAO<E extends GenericEntity> implements GenericDA
 	}
 
 	@Override
-	public void delete(E entity) throws Exception {
+	public void delete(E entity) {
 		E e = findById(entity.getId());
 		e.setDeleted(true);
 		update(e);
@@ -52,11 +53,16 @@ public abstract class HibernateDAO<E extends GenericEntity> implements GenericDA
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public E findById(Integer id) throws Exception {
+	public E findById(Integer id) {
+		E entity = null;
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(entityClass);
 		criteria.add(Restrictions.eq("id", id));
 		criteria.add(Restrictions.eq("deleted", false));
-		return (E) criteria.uniqueResult();
+		entity = (E) criteria.uniqueResult();
+		if (entity == null) {
+			throw new AbstractEntityNotFoundException("No entity found with this id");
+		}
+		return entity;
 	}
 
 	@SuppressWarnings("unchecked")

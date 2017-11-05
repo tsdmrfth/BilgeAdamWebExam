@@ -23,8 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bilgeadam.webexam.exception.SaveProductImageFailedException;
 import com.bilgeadam.webexam.model.DatabaseService;
-import com.bilgeadam.webexam.model.entity.impl.Product;
-import com.bilgeadam.webexam.model.entity.impl.ProductDetail;
+import com.bilgeadam.webexam.model.FormData;
 import com.bilgeadam.webexam.model.entity.impl.User;
 
 /**
@@ -71,42 +70,41 @@ public class AdminPanelController {
 		// return "redirect:/users";
 	}
 
-	@GetMapping("/addproduct")
+	@RequestMapping(value = "/addproduct", method = RequestMethod.GET)
 	public String addProduct(Model model) {
-		Product productToAdd = new Product();
-		ProductDetail productDetail = new ProductDetail();
-		model.addAttribute("productToAdd", productToAdd);
-		model.addAttribute("productDetail", productDetail);
+		model.addAttribute("formData", new FormData());
 		return "addproduct";
 	}
 
 	@RequestMapping(value = "/addproduct", method = RequestMethod.POST)
-	public String processAddProduct(@Valid @ModelAttribute("productToAdd") Product productToAdd,
-			@ModelAttribute ProductDetail productDetail, BindingResult bindingResult, HttpServletRequest request,
-			Model model, SaveProductImageFailedException exception) throws SaveProductImageFailedException {
+	public String processAddForm(@Valid @ModelAttribute("formData") FormData formData, BindingResult bindingResult,
+			HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return "addproduct";
 		}
-		MultipartFile productImage = productDetail.getProductImage();
+		MultipartFile productImage = formData.getProductDetail().getProductImage();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		String productImageUrl = rootDirectory + "/resorces/assets/images/" + productToAdd.getId() + ".png";
+		String productImageUrl = rootDirectory + "/resources/assets/images/"
+				+ databaseService.getProductService().getProductBarcode(formData.getProduct()) + ".png";
 		if (productImage != null && !productImage.isEmpty()) {
 			try {
 				productImage.transferTo(new File(productImageUrl));
 			} catch (Exception e) {
-				throw new SaveProductImageFailedException("Product image saving failed");
 			}
 		}
-		productToAdd.setProductImageUrl(productImageUrl);
-		databaseService.getProductDetailService().save(productDetail);
-		productToAdd.setProductDetail(productDetail);
-		databaseService.getProductService().save(productToAdd);
+		formData.getProductDetail().setProductImageUrl(productImageUrl);
+		databaseService.getProductDetailService().save(formData.getProductDetail());
+		formData.getProduct().setProductDetail(formData.getProductDetail());
+		databaseService.getProductService().save(formData.getProduct());
 		return "redirect:/stock";
 	}
 
 	@InitBinder
 	public void initialiseBinder(WebDataBinder binder) {
-		// binder.setDisallowedFields("productImageUrl");
+		binder.setAllowedFields("productDetail.productImage", "product.availableStock", "productDetail.batteryPower",
+				"product.brand", "productDetail.color", "productDetail.display", "product.model", "product.name",
+				"product.price", "productDetail.processor", "product.producedYear", "product.productCategory",
+				"productDetail.ram", "productDetail.resolution", "productDetail.storage", "productDetail.weight");
 	}
 
 	@ExceptionHandler(SaveProductImageFailedException.class)

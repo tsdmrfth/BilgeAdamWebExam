@@ -1,18 +1,15 @@
-/**
- * 
- */
 package com.bilgeadam.webexam.exception;
 
 /**
- * @author Fatih Taşdemir Nov 3, 2017
+ * @author Fatih Taşdemir Nov 4, 2017
  */
-public class ProductNotFoundException extends AbstractEntityNotFoundException {
+
+public class AbstractEntityNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	private String exception;
 
-	public ProductNotFoundException(String exception) {
-		super(exception);
+	public AbstractEntityNotFoundException(String exception) {
 		this.exception = exception;
 	}
 

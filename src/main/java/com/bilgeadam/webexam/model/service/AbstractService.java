@@ -31,17 +31,17 @@ public class AbstractService<E extends GenericEntity> implements GenericService<
 	}
 
 	@Override
-	public void delete(E entity) throws Exception {
+	public void delete(E entity) {
 		genericDAO.delete(entity);
 	}
 
 	@Override
-	public E findById(Integer id) throws Exception {
+	public E findById(Integer id) {
 		return genericDAO.findById(id);
 	}
 
 	@Override
-	public List<E> findAll(){
+	public List<E> findAll() {
 		return genericDAO.findAll();
 	}
 }

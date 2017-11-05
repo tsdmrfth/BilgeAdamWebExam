@@ -7,5 +7,6 @@ import com.bilgeadam.webexam.model.entity.impl.Product;
  */
 
 public interface ProductDAO extends GenericDAO<Product> {
-
+	
+	String getProductBarcode(Product product);
 }

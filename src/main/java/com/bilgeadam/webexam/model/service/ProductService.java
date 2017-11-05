@@ -8,4 +8,5 @@ import com.bilgeadam.webexam.model.entity.impl.Product;
 
 public interface ProductService extends GenericService<Product> {
 
+	String getProductBarcode(Product product);
 }

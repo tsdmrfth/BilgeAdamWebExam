@@ -6,10 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
 
 import com.bilgeadam.webexam.model.entity.AbstractEntity;
 
@@ -26,6 +27,7 @@ public class Customer extends AbstractEntity {
 	private String lastName;
 	private String email;
 	private String password;
+	private String phoneNumber;
 	private Gender gender;
 	private Address address;
 	private List<ShoppingCart> customerShoppingCart;
@@ -67,6 +69,17 @@ public class Customer extends AbstractEntity {
 		this.password = password;
 	}
 
+	@Pattern(regexp = "###-###-####")
+	@Max(value = 10)
+	@Column(name = "PHONE_NUMBER", nullable = false)
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "GENDER", nullable = false)
 	public Gender getGender() {
@@ -77,8 +90,7 @@ public class Customer extends AbstractEntity {
 		this.gender = gender;
 	}
 
-	@OneToOne
-	@MapsId
+	@OneToOne(targetEntity = Address.class)
 	public Address getAddress() {
 		return address;
 	}

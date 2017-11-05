@@ -27,123 +27,126 @@
 <body>
 	<section class="container"
 		style="position: absolute-center; background-color: lightblue; align-items: center;">
-		<form:errors path="*" cssClass="alert alert-danger" element="div" />
-		<form:form name="addForm" modelAttribute="productToAdd"
-			enctype="multipart/form-data" class="form-horizontal" method="post">
+		<form:form name="addForm" modelAttribute="formData"
+			class="form-horizontal" method="post" enctype="multipart/form-data">
+			<form:errors path="*" cssClass="alert alert-danger" element="div" />
 			<fieldset>
 				<legend>
 					<spring:message code="addProduct.form.addNewProduct"></spring:message>
 				</legend>
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="name"><spring:message
+					<label class="control-label col-lg-2 col-lg-2" for="product.name"><spring:message
 							code="addProduct.form.productName.label" /></label>
-					<form:input id="name" path="name" type="text"
+					<form:input id="product.name" path="product.name" type="text"
 						value="Galaxy S8 +EDGE" class="form:input-medium" />
-					<form:errors path="name" cssClass="text-danger" />
+					<form:errors path="product.name" cssClass="text-danger" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="brand"><spring:message
+					<label class="control-label col-lg-2 col-lg-2" for="product.brand"><spring:message
 							code="addProduct.form.productBrand.label" /></label>
-					<form:input id="brand" path="brand" type="text" value="Samsung"
-						class="form:input-medium" />
-					<form:errors path="brand" cssClass="text-danger" />
+					<form:input id="product.brand" path="product.brand" type="text"
+						value="Samsung" class="form:input-medium" />
+					<form:errors path="product.brand" cssClass="text-danger" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="model"><spring:message
+					<label class="control-label col-lg-2 col-lg-2" for="product.model"><spring:message
 							code="addProduct.form.productModel.label" /></label>
-					<form:input id="model" path="model" type="text" value="Galaxy S8"
-						class="form:input-medium" />
-					<form:errors path="model" cssClass="text-danger" />
+					<form:input id="product.model" path="product.model" type="text"
+						value="Galaxy S8" class="form:input-medium" />
+					<form:errors path="product.model" cssClass="text-danger" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="price"><spring:message
+					<label class="control-label col-lg-2 col-lg-2" for="product.price"><spring:message
 							code="addProduct.form.productPrice.label" /></label>
-					<form:input id="price" path="price" type="text" value="4400"
-						class="form:input-medium" />
-					<form:errors path="price" cssClass="text-danger" />
+					<form:input id="product.price" path="product.price" type="text"
+						value="4400" class="form:input-medium" />
+					<form:errors path="product.price" cssClass="text-danger" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="productCategory"><spring:message
+					<label class="control-label col-lg-2" for="product.productCategory"><spring:message
 							code="addProduct.form.productCategory.label" /></label>
-					<form:input id="productCategory" path="productCategory" type="text"
-						value="Phone" class="form:input-medium" />
-					<form:errors path="productCategory" cssClass="text-danger" />
+					<form:input id="product.productCategory"
+						path="product.productCategory" type="text" value="Phone"
+						class="form:input-medium" />
+					<form:errors path="product.productCategory" cssClass="text-danger" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="producedYear"><spring:message
+					<label class="control-label col-lg-2" for="product.producedYear"><spring:message
 							code="addProduct.form.productProducedYear.label" /></label>
-					<form:input id="producedYear" path="producedYear" type="text"
-						value="2017" class="form:input-medium" />
-					<form:errors path="producedYear" cssClass="text-danger" />
+					<form:input id="product.producedYear" path="product.producedYear"
+						type="text" value="2017" class="form:input-medium" />
+					<form:errors path="product.producedYear" cssClass="text-danger" />
 				</div>
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="availableStock"><spring:message
 							code="addProduct.form.productAvailableStock.label" /></label>
-					<form:input id="availableStock" path="availableStock" type="text"
-						value="1000" class="form:input-medium" />
-					<form:errors path="availableStock" cssClass="text-danger" />
+					<form:input id="product.availableStock"
+						path="product.availableStock" type="text" value="1000"
+						class="form:input-medium" />
+					<form:errors path="product.availableStock" cssClass="text-danger" />
 				</div>
-			</fieldset>
-			<form:form modelAttribute="productDetail" name="detailForm"
-				enctype="multipart/form-data" class="form-horizontal">
+
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="batteryPower"><spring:message
+					<label class="control-label col-lg-2"
+						for="productDetail.batteryPower"><spring:message
 							code="addProduct.form.productDetailBatteryPower.label" /></label>
-					<form:input id="batteryPower" path="batteryPower" type="text"
-						value="4400" class="form:input-medium" />
-					<form:errors path="batteryPower" cssClass="text-danger" />
-				</div>
-				<div class="form-group">
-					<label class="control-label col-lg-2" for="processor"><spring:message
-							code="addProduct.form.productDetailProcessor.label" /></label>
-					<form:input id="processor" path="processor" type="text" value="3"
+					<form:input id="productDetail.batteryPower"
+						path="productDetail.batteryPower" type="text" value="4400"
 						class="form:input-medium" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="weight"><spring:message
+					<label class="control-label col-lg-2" for="productDetail.processor"><spring:message
+							code="addProduct.form.productDetailProcessor.label" /></label>
+					<form:input id="productDetail.processor"
+						path="productDetail.processor" type="text" value="3"
+						class="form:input-medium" />
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="productDetail.weight"><spring:message
 							code="addProduct.form.productDetailWeight.label" /></label>
-					<form:input id="weight" path="weight" class="form:input-medium"
-						type="text" value="117" />
+					<form:input id="productDetail.weight" path="productDetail.weight"
+						class="form:input-medium" type="text" value="117" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="color"><spring:message
+					<label class="control-label col-lg-2" for="productDetail.color"><spring:message
 							code="addProduct.form.productDetailColor.label" /></label>
-					<form:input id="color" path="color" class="form:input-medium"
-						type="text" value="Gray" />
-					<form:errors path="color" cssClass="text-danger" />
+					<form:input id="productDetail.color" path="productDetail.color"
+						class="form:input-medium" type="text" value="Gray" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="storage"><spring:message
+					<label class="control-label col-lg-2" for="productDetail.storage"><spring:message
 							code="addProduct.form.productDetailStorage.label" /></label>
-					<form:input id="storage" path="storage" class="form:input-medium"
-						type="text" value="64" />
-					<form:errors path="storage" cssClass="text-danger" />
+					<form:input id="productDetail.storage" path="productDetail.storage"
+						class="form:input-medium" type="text" value="64" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="resolution"><spring:message
+					<label class="control-label col-lg-2"
+						for="productDetail.resolution"><spring:message
 							code="addProduct.form.productDetailResolution.label" /></label>
-					<form:input id="resolution" path="resolution" type="text"
-						value="687" class="form:input-medium" />
+					<form:input id="productDetail.resolution"
+						path="productDetail.resolution" type="text" value="687"
+						class="form:input-medium" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="display"><spring:message
+					<label class="control-label col-lg-2" for="productDetail.display"><spring:message
 							code="addProduct.form.productDetailDisplay.label" /></label>
-					<form:input id="display" path="display" class="form:input-medium"
-						type="text" value="7" />
+					<form:input id="productDetail.display" path="productDetail.display"
+						class="form:input-medium" type="text" value="7" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="ram"><spring:message
+					<label class="control-label col-lg-2" for="productDetail.ram"><spring:message
 							code="addProduct.form.productDetailRam.label" /></label>
-					<form:input id="ram" path="ram" class="form:input-medium"
-						type="text" value="8" />
-					<form:errors path="ram" cssClass="text-danger" />
+					<form:input id="productDetail.ram" path="productDetail.ram"
+						class="form:input-medium" type="text" value="8" />
 				</div>
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="productImage"> <spring:message
+					<label class="control-label col-lg-2"
+						for="productDetail.productImage"> <spring:message
 							code="addProdcut.form.productImage.label" />
 					</label>
 					<div class="col-lg-10">
-						<form:input id="productImage" path="productImage" type="file"
+						<form:input id="productDetail.productImage"
+							path="productDetail.productImage" type="file"
 							class="form:input-large" />
 					</div>
 				</div>
@@ -152,7 +155,8 @@
 						<spring:message code="addProduct.form.addProductButton.label"></spring:message>
 					</form:button>
 				</div>
-			</form:form>
+
+			</fieldset>
 		</form:form>
 	</section>
 </body>

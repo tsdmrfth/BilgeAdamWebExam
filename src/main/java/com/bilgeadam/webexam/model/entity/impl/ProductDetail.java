@@ -1,5 +1,6 @@
 package com.bilgeadam.webexam.model.entity.impl;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -28,6 +29,7 @@ public class ProductDetail extends AbstractEntity {
 	private Integer display;
 	private Integer ram;
 	private MultipartFile productImage;
+	private String productImageUrl;
 
 	@NotNull(message = "{productDetail.batteryPower.notNull}")
 	@Column(name = "BATTERY_POWER")
@@ -105,7 +107,8 @@ public class ProductDetail extends AbstractEntity {
 	public void setRam(Integer ram) {
 		this.ram = ram;
 	}
-	
+
+	@Basic
 	@Transient
 	public MultipartFile getProductImage() {
 		return productImage;
@@ -113,5 +116,14 @@ public class ProductDetail extends AbstractEntity {
 
 	public void setProductImage(MultipartFile productImage) {
 		this.productImage = productImage;
+	}
+
+	@Column(name = "IMAGE_URL", length = 255, nullable = false)
+	public String getProductImageUrl() {
+		return productImageUrl;
+	}
+
+	public void setProductImageUrl(String productImageUrl) {
+		this.productImageUrl = productImageUrl;
 	}
 }

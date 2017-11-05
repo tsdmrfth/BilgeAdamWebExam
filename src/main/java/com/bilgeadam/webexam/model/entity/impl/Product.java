@@ -3,7 +3,6 @@ package com.bilgeadam.webexam.model.entity.impl;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -30,11 +29,10 @@ public class Product extends AbstractEntity {
 	private Integer producedYear;
 	private Integer availableStock;
 	private ProductDetail productDetail;
-	private String productImageUrl;
 	private Integer unitsInOrder;
 
 	@NotNull(message = "{product.name.notNull}")
-	@Size(min = 2, max = 50, message = "{product.name.size.error}")
+	@Size(min = 2, message = "{product.name.size.error}")
 	@Column(name = "NAME", length = 100, nullable = false)
 	public String getName() {
 		return name;
@@ -45,7 +43,7 @@ public class Product extends AbstractEntity {
 	}
 
 	@NotNull(message = "{product.brand.notNull}")
-	@Size(min = 2, max = 50, message = "{product.brand.size.error}")
+	@Size(min = 2, message = "{product.brand.size.error}")
 	@Column(name = "BRAND", length = 100, nullable = false)
 	public String getBrand() {
 		return brand;
@@ -56,7 +54,7 @@ public class Product extends AbstractEntity {
 	}
 
 	@NotNull(message = "{product.model.notNull}")
-	@Size(min = 2, max = 50, message = "{product.model.size.error}")
+	@Size(min = 2, message = "{product.model.size.error}")
 	@Column(name = "MODEL", length = 100, nullable = false)
 	public String getModel() {
 		return model;
@@ -115,23 +113,13 @@ public class Product extends AbstractEntity {
 		this.availableStock = availableStock;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@MapsId
+	@OneToOne(cascade = CascadeType.ALL, targetEntity = ProductDetail.class)
 	public ProductDetail getProductDetail() {
 		return productDetail;
 	}
 
 	public void setProductDetail(ProductDetail productDetail) {
 		this.productDetail = productDetail;
-	}
-
-	@Column(name = "IMAGE_URL", length = 255, nullable = false)
-	public String getProductImageUrl() {
-		return productImageUrl;
-	}
-
-	public void setProductImageUrl(String productImageUrl) {
-		this.productImageUrl = productImageUrl;
 	}
 
 	public Integer getUnitsInOrder() {

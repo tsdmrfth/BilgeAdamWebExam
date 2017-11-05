@@ -10,14 +10,14 @@ import com.bilgeadam.webexam.model.entity.GenericEntity;
 
 public interface GenericDAO<E extends GenericEntity> {
 
-	public abstract void save(E entity);
+	void save(E entity);
 
-	public abstract void update(E entity);
+	void update(E entity);
 
-	public abstract void delete(E entity) throws Exception;
+	void delete(E entity);
 
-	public abstract E findById(Integer id) throws Exception;
+	E findById(Integer id);
 
-	public abstract List<E> findAll();
+	List<E> findAll();
 
 }

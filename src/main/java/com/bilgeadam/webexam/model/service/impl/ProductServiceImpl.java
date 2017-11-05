@@ -16,8 +16,16 @@ import com.bilgeadam.webexam.model.service.ProductService;
 public class ProductServiceImpl extends AbstractService<Product> implements ProductService {
 
 	@Autowired
+	ProductDAO productDAO;
+	
 	public ProductServiceImpl(ProductDAO productDAO) {
 		super(productDAO);
+		this.productDAO = productDAO;
+	}
+
+	@Override
+	public String getProductBarcode(Product product) {
+		return productDAO.getProductBarcode(product);
 	}
 
 }
